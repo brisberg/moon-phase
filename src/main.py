@@ -1,1 +1,2 @@
-print('Welcome to Moon Phase!')
+def mainfunction():
+    print('Welcome to Moon Phase!')
