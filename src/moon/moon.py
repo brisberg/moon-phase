@@ -28,25 +28,32 @@ def get_phase_progress_on_day(year: int, month: int, day: int):
 
 def get_luminocity_on_day(year: int, month: int, day: int):
   """Returns a floating-point number for the percentage of the moon illuminated"""
-  return 0
 
-def get_phase_from_luminocity(luminocity):
-  """Returns a Phase Enum given a moon luminocity."""
-  if luminocity <= 0.02:
+  #Use Year, Month, Day as arguments
+  date = ephem.Date(datetime.date(year,month,day))
+  moon = ephem.Moon()
+  moon.compute(date)
+  luminocity = moon.phase
+
+  return luminocity
+
+def get_phase_from_progression(progression):
+  """Returns a Phase Enum given a moon progression (float from 0-1 with 0.5 being Full Moon)."""
+  if progression <= 0.02:
     return Phase.NEW_MOON
-  elif luminocity < 0.23:
+  elif progression < 0.23:
     return Phase.WAXING_CRESCENT
-  elif luminocity <= 0.27:
+  elif progression <= 0.27:
     return Phase.FIRST_QUARTER
-  elif luminocity < 0.48:
+  elif progression < 0.48:
     return Phase.WAXING_GIBBOUS
-  elif luminocity <= 0.52:
+  elif progression <= 0.52:
     return Phase.FULL_MOON
-  elif luminocity < 0.73:
+  elif progression < 0.73:
     return Phase.WANING_GIBBOUS
-  elif luminocity <= 0.77:
+  elif progression <= 0.77:
     return Phase.LAST_QUARTER
-  elif luminocity < 0.98:
+  elif progression < 0.98:
     return Phase.WANING_CRESCENT
   else:
     return Phase.NEW_MOON
