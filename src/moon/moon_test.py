@@ -1,5 +1,5 @@
 import pytest
-from moon import Phase, get_luminocity_on_day, get_phase_progress_on_day, get_phase_from_progression
+from moon.moon import Phase, get_luminocity_on_day, get_phase_progress_on_day, get_phase_from_progression
 
 def test_get_phase_progression_from_day():
     # First full moon in 2000 is 5:40 PM Jan, 21 UTC
